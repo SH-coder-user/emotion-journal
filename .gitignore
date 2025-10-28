@@ -1,0 +1,19 @@
+# Node / Vite
+node_modules/
+dist/
+build/
+
+# Env / secrets (절대 커밋 금지)
+*.env
+server/.env
+client/.env
+
+# Logs & OS junk
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+
+# Server uploads (선택: 원본 음성파일 보관 안 할 경우)
+server/uploads/
