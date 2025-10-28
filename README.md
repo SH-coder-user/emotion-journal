@@ -219,19 +219,13 @@ npm run dev            # http://localhost:5173 (Vite 프록시로 /api 연결)
 
 ---
 
-## 🧑‍💻 팀 개발 워크플로
+## 🧑‍💻개발 워크플로(팀의 경우)
 
 1. GitHub Repository Fork / Clone
 2. 각자 `.env` 로 OpenAI Key 설정
 3. 브랜치 전략: `feature/<기능명>` → PR → main 머지
 4. 코드 포맷팅: Prettier / ESLint 자동화
 5. Docker Compose로 통합 테스트
-
----
-
-## 🧾 LICENSE
-MIT License © 2025 Emotion Journal Team  
-(비상업적/해커톤 데모 용도로 자유 사용 가능)
 
 ---
 
