@@ -54,9 +54,10 @@ Backend (Express)
 PostgreSQL
    │
    └─ entries 테이블 (일자, 제목, 내용, 감정라벨/점수)
+```
+
 🗂 디렉터리 구조
-bash
-코드 복사
+```
 emotion-journal/
  ├── client/              # React 프런트엔드
  │   ├── src/pages/       # Banner, Record, Main, Detail, Edit
@@ -77,6 +78,8 @@ emotion-journal/
  ├── .gitignore
  ├── README.md
  └── ...
+```
+
 🚀 실행 방법
 ✅ 1. 사전 준비
 Docker Desktop (Windows/Mac)
@@ -87,25 +90,24 @@ OpenAI API Key
 ✅ 2. 환경 변수 설정
 저장소 루트에 .env 파일 생성:
 
-bash
-코드 복사
+```
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
+```
 server/.env.example 을 참고해 백엔드 설정 가능:
-
-bash
-코드 복사
+```
 OPENAI_TRANSCRIBE_MODEL=whisper-1
 OPENAI_SUMMARY_MODEL=gpt-4o-mini
 DATABASE_URL=postgres://postgres:postgres@db:5432/emojournal
 PORT=8080
+```
+
 ✅ 3. 도커로 한 번에 실행
-bash
-코드 복사
+```
 docker compose up -d --build
+```
+
 기동 순서
-
 db → server → client 순으로 자동 실행
-
 브라우저 접속 : http://localhost:8080
 
 ✅ 4. 실행 후 구성요소 확인
@@ -117,8 +119,7 @@ DB 연결	docker compose logs server	“Server listening…” 메시지
 💻 개발용 로컬 실행 (도커 없이)
 개발자는 로컬에서 Hot Reload로 빠르게 테스트 가능
 
-bash
-코드 복사
+```
 # 1. PostgreSQL 띄우기 (도커)
 docker run -d --name emojournal-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=emojournal -p 5432:5432 postgres:16
 
@@ -132,6 +133,8 @@ npm run dev            # http://localhost:8080
 cd ../client
 npm i
 npm run dev            # http://localhost:5173 (Vite 프록시로 /api 연결)
+```
+
 🧪 기능 테스트 시나리오
 단계	동작	기대 결과
 1	메인 페이지(Banner) 접속	“🎙️ 음성 녹음” 버튼 표시
@@ -146,9 +149,9 @@ npm run dev            # http://localhost:5173 (Vite 프록시로 /api 연결)
 🧰 주요 구현 포인트
 🎙️ 1. 브라우저 음성 녹음 (MediaRecorder)
 사용자의 마이크 입력을 Blob(WebM/OGG)으로 저장
-
+```
 navigator.mediaDevices.getUserMedia({ audio:true })
-
+```
 녹음 완료 후 multipart/form-data 로 서버 업로드
 
 🤖 2. STT + 요약 + 감정분석
@@ -156,14 +159,15 @@ Whisper: 음성 → 텍스트 변환
 
 GPT (gpt-4o-mini):
 
-json
-코드 복사
+```
 {
   "title": "20자 이내 제목",
   "summary": "요약 내용",
   "emotion_label": "기쁨|슬픔|무난",
   "emotion_score": 0~100
 }
+```
+
 🗄️ 3. PostgreSQL
 entries 테이블 구조:
 
